@@ -1,41 +1,56 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Giftastic</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" >
+  <meta charset="UTF-8">
+  <title>GifTastic Entertainment</title>
 
-    <script src="./assets/javascript/gif.js"></script>
+
+  <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
-    
 
-    <form id = "soccer-form">
-      <label for ="movie-input">Add a soccer player</label>
-      <input type ="text" id ="soccer-input"> <br>
-   
-      
+  <div class="container">
+    <div class="row" id="emptyPanel">
+    </div> 
 
-    </form>
-<div id ="button-panel"></div>
-<div id = "giphy"></div>
-<div id = "empty"></div>
-<div id = "soccer-view"></div>
+    <div class="row">
+      <div class="col-lg-10" id="soccerGifs">
+      </div> 
 
-<button data-person= "kaka"> kaka</button>
-<button data-person = "ronaldo">ronaldo</button>
-<button data-person="messi">messi</button>
-<button data-person ="hazard">harzard</button>
-<button data-person ="zidane">zidane</button>
-<button data-person ="iniesta">iniesta</button>
-<button data-person ="cafu">cafu</button>
+      <div class="col-lg-2 formPanel"> 
+        <form id="soccer-form">
+          <label for="soccer-input" class="inputLabel">Add a soccer player</label>
+          <input type="text" id="soccer-input"><br>
 
+          <input id="add-soccerPlayer" type="submit" value="Submit">
+        </form>
+      </div> 
 
+    </div> 
 
+    <div class="row">
 
+      <div id="footerSpacer">
+      </div>
+
+      <div class="footer navbar-fixed-bottom" id="footerPanel">
+      </div>
+
+    </div> 
+
+  </div> 
+  <script type="text/javascript" src="./assets/javascript/gif.js"></script>
 
 </body>
 </html>
+
+
+
+
