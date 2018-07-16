@@ -1,132 +1,112 @@
 
 
+// array of soccer players
+var soccerPlayers = ["marcelo", "neymer", "messi", "ronaldo", "zidane",
+                  "ronaldinho", "xavi", "pogba", "mbappe", "kroos"
+                   ];
 
+function playerButtons() {
+  $("#button").empty();
 
+  // Loop through the array of animals
+  for (var i = 0; i < soccerPlayers.length; i++) {
+    // Dynamicaly generate a button 
+    var Btons = $("<button>");
+    Btons.addClass("playerButton");
+    Btons.attr("data-soccer", soccerPlayers[i]);
+    Btons.text(soccerPlayers[i]);
 
-
-var topics = ["cat", "ronaldo","messi","hazard","zidane", "iniesta", "cafu"];
-
-// functions for displaying soccer data
-function displayButtons() {
-
-    $("#emptyPanel").empty();
-
-
-for (var i =0; i < topics.length; i++){
-  
-    // dynamically generate button for all topics
-    var Bottons = $("<button>");
-     Bottons.addClass("soccerButtons");
-     Bottons.attr("data-soccer", topics[i]);
-     Bottons.text(topics[i]);
-
-     $("#emptyPanel").append(Bottons);
-    
+    $("#button").append(Btons);
+  }
 }
-}
-// event listeners for all our buttons
-$("#add-soccerPlayer").on("click", function(e){
-    
-    e.preventDefault();
-  
-     var soccer = $("#soccer-input").val().trim();
-     topics.push(soccer);
 
-     $("#soccer-input").val("");
+// ----- Event Handlers ----- //
 
-   // call the function
+// An event handler for the user form to add additional animals to the array
+$("#add-Player").on("click", function(e) {
+  e.preventDefault();
 
-   displayButtons();
+  // Get the input from the textbox
+  var players = $("#input").val().trim();
 
+  // The animal from the textbox is then added to our animalsArr array
+  soccerPlayers.push(players);
+  $("#input").val("");
+
+  // Redraw the animal buttons
+  playerButtons();
 });
 
-  // finding soccer gifs with the Giphy API
-function findSoccerGifs() {
-  
-var soccerName = $(this).attr("data-soccer");
-var soccerStars = soccerName.split(" ").join("+");
+// fetchAnimalGifs will fetch animal Gifs with the Giphy API
+function soccerGifs() {
+  // Get the animal name from the button clicked
+  var name = $(this).attr("data-soccer");
+  var soccerStr = name.split(" ").join("+");
 
-// construct the Giphy URL
+  // Construct the Giphy URL
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + soccerStr + 
+                 "&rating=pg-13&limit=20&api_key=dc6zaTOxFJmzC";
 
-var queryURL =  "https://api.giphy.com/v1/gifs/search?q=" + soccerStars + "&rating=pg-13&limit=20&api_key=dc6zaTOxFJmzC";
-
-
-
-
-// make the Ajax call to the Giphy API
-
-
-$.ajax({
-
-    method: "GET",
-    url: queryURL
-
-}).then(function(response){
-
-    var ratings = response.data;
-
-    // display div for each of the element return 
-
-      $("#soccerGifs").empty();
-
-      for ( var i = 0; i < ratings.length; i++){
-        
-      
-
-        var pOne =("<div>");
-        pOne.addClass("soccerBottons");
-        var pTwo = $("<p>").text("Rating: " + ratings[i].rating);
-
-        
-        pOne.append(pTwo);
-
-       // creating an element to hold the image
-       var imageId = $("<img>");
-       imageId.attr("src", ratings[i].images.fixed_height_still.url);
-       imageId.attr("data-still", ratings[i].images.fixed_height_still.url);
-       imageId.attr("data-soccer", ratings[i].images.fixed_height.url);
-       imageId.attr("data-state", "still" );
-       pOne.append(imageId);
-      
+  // Make the AJAX call to the Giphy API
+  $.ajax({
+    url: queryURL,  
+    method: "GET"
     
-         $("#soccerGifs").append(pOne);
+  })
+  .done(function( response ) {
+    // Get the results array
+    var arrayPlayers = response.data;
+
+    // Create and display div elements for each of the returned Gifs
+    $("#gif").empty();
+    for (var i = 0; i < arrayPlayers.length; i++) {
+      var ndiv = $("<div>");
+      ndiv.addClass("soccer");
+
+      var nRating = $("<h2>").html("Rating: " + arrayPlayers[i].rating);
+      ndiv.append(nRating);
+
+      var img = $("<img>");
+      img.attr("src", arrayPlayers[i].images.fixed_height_still.url);
+      img.attr("data-still", arrayPlayers[i].images.fixed_height_still.url);
+      img.attr("data-animate", arrayPlayers[i].images.fixed_height.url);
+      img.attr("data-state", "still");
+      ndiv.append(img);
+
+      // Append the new Gifs to the gifPanel
+      $("#gif").append(ndiv);
     }
-
-});
-
+  });
 }
 
- // function that animate and stop a moving Gif
+// animateAnimalGif will animate a still Gif and stop a moving Gif
+function animateAndStop() {
+  // The image state will be either "still" or "animated"
+  var state = $(this).find("img").attr("data-state");
 
- function animateAndStop (){
-   
-     var state = $(this).find("img").attr("data-state");
+  // Make the Gif either animated or still depending on the "data-state" value
+  if (state === "still") {
+    $(this).find("img").attr("src", $(this).find("img").attr("data-animate"));
+    $(this).find("img").attr("data-state", "animate");
+  } else {
+    $(this).find("img").attr("src", $(this).find("img").attr("data-still"));
+    $(this).find("img").attr("data-state", "still");
+  }
+}
 
-     if (state === "still") {
-         $(this).find("img").attr("src", $(this).find("img").attr("data-animate"));
-         $(this).find("img").attr("data-state", "animate");
+// Render the initial animal buttons when the HTML has finished loading
+$(document).ready(function() {
+  playerButtons();
+});
+
+// An event handler for the animal buttons to fetch appropriate Gifs
+$(document).on("click", ".playerButton", soccerGifs);
+
+// Add an event handler for the animal Gifs to make the image animate and stop
+$(document).on("click", ".soccer", animateAndStop);
 
 
-     }  else {
-        $(this).find("img").attr("src", $(this).find("img").attr("data-still"));
-        $(this).find("img").attr("data-state","still");
-        
-     }
-  
- }
 
-
-   $(document).ready(function(){
-       displayButtons();
-
-   });
-
-   // an event handler for soccer buttons to find appropriate gifs
-
-   $(document).on("click", ".soccerBottons", findSoccerGifs );
-
-   // event handler to make image animate 
-   $(document).on("click", ".animateBottons", animateAndStop );
 
 
 
