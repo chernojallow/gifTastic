@@ -4,24 +4,7 @@ body {
 	background-repeat: repeat;
 }
 
-.jumbotron {
-  position: relative;
-  background-color: transparent;
-  padding: 0.6em 0.6em;
-  margin: 2.0em 0.0em 0em 0.0em;
-}
-
-.jumbotron h1 {
-	font-size: 4em;
-  color: #e5d1d9;
-}
-
-.jumbotron h2 {
-	font-size: 2em;
-  color: #d3f2de;
-}
-
-.animalButton {
+.playerButton {
   padding: 10px 20px;
   font-size: 15px;
   text-align: center;
@@ -36,17 +19,17 @@ body {
   margin: 5px 5px;
 }
 
-.animalButton:hover {
+.playerButton:hover {
   background-color: #f2d3e7
 }
 
-.animalButton:active {
+.playerButton:active {
   background-color: #f2d3e7;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
-#gifPanel {
+#gif {
   margin: 10px 0px 0px 0px;
 }
 
@@ -59,11 +42,11 @@ body {
   background-color: #f2d3e7;
 }
 
-.animalGif:hover {
+.soccer:hover {
   background-color: #bdd9c7;
 }
 
-.animalGif h2 {
+.soccer h2 {
   font-size: 15px;
   color: #72a1d3;
   text-align: center;
@@ -71,7 +54,7 @@ body {
   top: -3px;
 }
 
-.animalGif img {
+.soccer img {
   border-radius: 15px 50px;
 }
 
@@ -80,7 +63,6 @@ body {
   top: 30px;
   right: 35px;
   border-radius: 15px 50px;
-  background-color: #f2d3e7;
   height: 145px;
 }
 
@@ -92,31 +74,20 @@ body {
 }
 
 #input {
-  width: 137px;
+  width: 220px;
   margin-left: 15px;
 }
 
-#animal-input:focus {
+#input:focus {
   background-color: #bdd9c7;
 }
 
-#add-player {
+#add-Player {
   margin-top: 15px;
   margin-left: 15px;
   padding: 5px 45px;
-}
-
-#footerSpacer {
-  background: transparent;
-  width: 100%;
-  height: 70px;
-}
-
-#footerPanel {
-  text-align: center;
-  color: #72a1d3;
   background-color: #bdd9c7;
-  border-radius: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
+
+
+  

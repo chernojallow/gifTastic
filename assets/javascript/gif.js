@@ -2,13 +2,13 @@
 
 // array of soccer players
 var soccerPlayers = ["marcelo", "neymer", "messi", "ronaldo", "zidane",
-                  "ronaldinho", "xavi", "pogba", "mbappe", "kroos"
+                  "ronaldinho", "xavi", "pogba", "mbappe", "kroos", "robben", "maradona"
                    ];
 
 function playerButtons() {
   $("#button").empty();
 
-  // Loop through the array of animals
+  // Loop through the array of soccer players 
   for (var i = 0; i < soccerPlayers.length; i++) {
     // Dynamicaly generate a button 
     var Btons = $("<button>");
@@ -20,26 +20,19 @@ function playerButtons() {
   }
 }
 
-// ----- Event Handlers ----- //
-
-// An event handler for the user form to add additional animals to the array
 $("#add-Player").on("click", function(e) {
   e.preventDefault();
-
-  // Get the input from the textbox
   var players = $("#input").val().trim();
 
-  // The animal from the textbox is then added to our animalsArr array
   soccerPlayers.push(players);
   $("#input").val("");
 
-  // Redraw the animal buttons
+  // call the function
   playerButtons();
 });
 
-// fetchAnimalGifs will fetch animal Gifs with the Giphy API
+// find the players with the Giphy API
 function soccerGifs() {
-  // Get the animal name from the button clicked
   var name = $(this).attr("data-soccer");
   var soccerStr = name.split(" ").join("+");
 
@@ -54,7 +47,6 @@ function soccerGifs() {
     
   })
   .done(function( response ) {
-    // Get the results array
     var arrayPlayers = response.data;
 
     // Create and display div elements for each of the returned Gifs
@@ -73,13 +65,12 @@ function soccerGifs() {
       img.attr("data-state", "still");
       ndiv.append(img);
 
-      // Append the new Gifs to the gifPanel
       $("#gif").append(ndiv);
     }
   });
 }
 
-// animateAnimalGif will animate a still Gif and stop a moving Gif
+// function to animate a still gif and stop a moving gif
 function animateAndStop() {
   // The image state will be either "still" or "animated"
   var state = $(this).find("img").attr("data-state");
@@ -91,7 +82,7 @@ function animateAndStop() {
   } else {
     $(this).find("img").attr("src", $(this).find("img").attr("data-still"));
     $(this).find("img").attr("data-state", "still");
-  }
+  }  
 }
 
 // Render the initial animal buttons when the HTML has finished loading
@@ -99,10 +90,7 @@ $(document).ready(function() {
   playerButtons();
 });
 
-// An event handler for the animal buttons to fetch appropriate Gifs
 $(document).on("click", ".playerButton", soccerGifs);
-
-// Add an event handler for the animal Gifs to make the image animate and stop
 $(document).on("click", ".soccer", animateAndStop);
 
 
