@@ -1,8 +1,4 @@
 
-body {
-	background: url(../images/background.png);
-	background-repeat: repeat;
-}
 
 .playerButton {
   padding: 10px 20px;
@@ -21,12 +17,6 @@ body {
 
 .playerButton:hover {
   background-color: #f2d3e7
-}
-
-.playerButton:active {
-  background-color: #f2d3e7;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
 }
 
 #gif {
@@ -90,4 +80,8 @@ body {
 }
 
 
+body {
+	background: url(../images/background.png);
+	background-repeat: repeat;
+}
   
